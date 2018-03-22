@@ -6,8 +6,8 @@
 #include "timer_driver.h"
 
 /*General defination for Enable and Disable for positive logic*/
-#define GENERIC_Enable 1
-#define GENERIC_Disable 0
+#define GENERIC_Enabled 1
+#define GENERIC_Disabled 0
 
 /*dummy function pointer to make scope of callback pointer global*/
 void (*irq_handler)(void)		= NULL;
@@ -57,11 +57,11 @@ void TIMER2_IRQHandler(){
 
 void timer_stop(){
 	/*Stop timer from counting further*/
-	NRF_TIMER1->TASKS_STOP		= GENERIC_Enabled;
+	NRF_TIMER2->TASKS_STOP		= GENERIC_Enabled;
 	/*Clear timer value to avoid the generation of garbage value*/
-	NRF_TIMER1->TASKS_CLEAR		= GENERIC_Enabled;
+	NRF_TIMER2->TASKS_CLEAR		= GENERIC_Enabled;
 	/*Timer shutdown to save power*/
-	NRF_TIMER1->TASKS_SHUTDOWN	= GENERIC_Enabled;
+	NRF_TIMER2->TASKS_SHUTDOWN	= GENERIC_Enabled;
 }
 /**
  * @}

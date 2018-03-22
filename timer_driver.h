@@ -9,6 +9,9 @@
 #define TIMER_DRIVER_H
 
 #include <stdint.h>
+#include <stdio.h>
+#include "boards.h"
+#include "nrf.h"
 
 /**
  * @brief This funtion is used to generate event at every specific duration in microseconds specified by application program
