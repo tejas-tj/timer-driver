@@ -16,6 +16,9 @@
 void led_blink(void){
 	/*LED 2 toggle*/
 	hal_gpio_pin_toggle(LED_2);
+//	if(BUTTON_1)	hal_gpio_pin_toggle(LED_1);
+	hal_gpio_pin_toggle(LED_3);
+//	if(BUTTON_2)	hal_gpio_pin_toggle(LED_4);
 }
 
 /**
@@ -24,10 +27,17 @@ void led_blink(void){
 int main(void){
 	/*Configuring LED 2 as output with default value 1*/
 	hal_gpio_cfg_output(LED_2, 1);
+	hal_gpio_cfg_output(LED_1, 0);
+	hal_gpio_cfg_output(LED_3, 1);
+	hal_gpio_cfg_output(LED_4, 0);
+	hal_gpio_cfg_input(BUTTON_1, HAL_GPIO_PULL_DISABLED);
+	hal_gpio_cfg_input(BUTTON_2, HAL_GPIO_PULL_DISABLED);
 	/*starting timer for 509 milliseconds*/
-	timer_start(509000, led_blink);
+	if(BUTTON_1)	hal_gpio_pin_toggle(LED_1);
+	if(BUTTON_2)	hal_gpio_pin_toggle(LED_4);
+	timer_start(1000000000, led_blink);
 	/*to run program indefinately long with core remain idle excpet when it toggles LED*/
-	while(1){}
+	while(1){if(BUTTON_1)	hal_gpio_pin_toggle(LED_1);if(BUTTON_2)	hal_gpio_pin_toggle(LED_4);}
 	return 0;
 }
 
